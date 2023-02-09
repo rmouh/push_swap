@@ -6,7 +6,7 @@
 #    By: rmouhoub <rmouhoub@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/02 11:23:16 by rmouhoub          #+#    #+#              #
-#    Updated: 2023/02/03 18:07:50 by rmouhoub         ###   ########.fr        #
+#    Updated: 2023/02/09 19:31:54 by rmouhoub         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ DIR_OBJS		=	objs
 SRCS 		= 	$(DIR_ALGO)/stack_3.c \
 				$(DIR_ALGO)/algo.c \
 				$(DIR_ALGO)/utils.c \
+				$(DIR_ALGO)/costs.c \
 				$(DIR_PARSER)/parser.c \
 				$(DIR_PARSER)/parser2.c \
 				$(DIR_MOVS)/movs.c \
@@ -44,7 +45,7 @@ ${NAME}		: ${OBJS}
 		${CC} $(OBJS) -o $(NAME) -L./libft/ -lft
 
 ${DIR_OBJS}/%.o:%.c
-		${CC}  -I ${INCLUDES} -I ${LIBFT} -c $< -o $@
+		${CC} ${CFLAGS} -I ${INCLUDES} -I ${LIBFT} -c $< -o $@
 
 clean :
 		make -C ./libft/ clean

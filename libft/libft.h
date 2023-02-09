@@ -6,7 +6,7 @@
 /*   By: rmouhoub <rmouhoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 17:35:37 by rmouhoub          #+#    #+#             */
-/*   Updated: 2023/02/03 15:36:46 by rmouhoub         ###   ########.fr       */
+/*   Updated: 2023/02/09 16:16:00 by rmouhoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,25 @@ int ft_putnbr(unsigned long nb, unsigned base, int up_do, int *counter);
 int	ft_putstr(char *c);
 int	ft_printf(const char *str, ...);
 
+
+typedef struct	s_bestmove
+{
+	int	ra;
+	int	rra;
+	int	rb;
+	int	rrb;
+	int	rr;
+	int	rrr;
+	int	bok;
+	int	bok_index;
+}	t_bestmove;
+
 typedef struct s_list
 {
 	int				content;
 	int				index;
 	struct s_list	*next;
+	t_bestmove		ell;
 }					t_list;
 
 /*

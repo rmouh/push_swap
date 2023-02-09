@@ -6,7 +6,7 @@
 /*   By: rmouhoub <rmouhoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 17:10:42 by rmouhoub          #+#    #+#             */
-/*   Updated: 2023/02/03 20:02:33 by rmouhoub         ###   ########.fr       */
+/*   Updated: 2023/02/09 15:40:04 by rmouhoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	*ft_callloc_tab(int nmemb)
 	int	i;
 
 	i = 0;
-	buf = malloc(sizeof(int) * (nmemb + 1));
+	buf = malloc(sizeof(int) * (nmemb));
 	if (!buf)
 		return (NULL);
 	while(i < nmemb)
@@ -43,6 +43,6 @@ int	*ft_callloc_tab(int nmemb)
 		buf[i] = 0;
 		i++;
 	}
-	buf[i] = '*';
+	//buf[i] = '*';
 	return (buf);
 }

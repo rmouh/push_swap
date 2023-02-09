@@ -6,13 +6,12 @@
 /*   By: rmouhoub <rmouhoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 17:04:48 by rmouhoub          #+#    #+#             */
-/*   Updated: 2023/02/03 18:08:11 by rmouhoub         ###   ########.fr       */
+/*   Updated: 2023/02/09 19:31:34 by rmouhoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include<stdio.h>
 #include "libft.h"
-
 
 
 /*
@@ -65,8 +64,21 @@ void 	swap(int *t1, int *t2);
 int		*bubble_sort(int *tab, int size);
 int 	tab_size(int *tab);
 void 	each_time(t_list **chaine, t_list **chaineB);
-void ra_or_rra(int headA, int size, t_list **chaine,  t_list **chaineB)
+void	ra_or_rra(int headA, int size, t_list **chaine,  t_list **chaineB)
 ;
+void	find_bok(t_list **chaine, t_list **chaineB);
+int		find_the_cheaper(t_list **chaineB);
+
+
+/*  
+	costs
+			*/
+
+int	ft_cost_of_up(int ra, int rb);
+int	ft_min(int ra, int rb);
+int	ft_cost_of_down(int rra, int rrb);
+int	ft_cost_of_up_do(int ra, int rrb);
+int	ft_cost_of_do_up(int rra, int rb);
 
 
 

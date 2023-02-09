@@ -6,20 +6,13 @@
 /*   By: rmouhoub <rmouhoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 11:59:15 by rmouhoub          #+#    #+#             */
-/*   Updated: 2023/01/26 18:24:50 by rmouhoub         ###   ########.fr       */
+/*   Updated: 2023/02/09 16:30:37 by rmouhoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-void	printl(t_list *chaine)
-{
-	while (chaine != NULL)
-	{
-		printf("[%d] --> %d\n", chaine->index, (int)(chaine->content));
-		chaine = chaine->next;
-	}
-}
+
 
 int	char_in(const char *str)
 {

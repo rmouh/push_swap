@@ -6,7 +6,7 @@
 /*   By: rmouhoub <rmouhoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:24:46 by rmouhoub          #+#    #+#             */
-/*   Updated: 2023/02/04 18:48:06 by rmouhoub         ###   ########.fr       */
+/*   Updated: 2023/02/09 16:31:10 by rmouhoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,13 @@
 
 void	printl(t_list *chaine)
 {
-	t_list	*temp;
-	
-	temp = chaine;
-	while (temp != NULL)
+	while (chaine != NULL)
 	{
-		printf("            [%d] --> %d\n", temp->index, (int)(temp->content));
-		temp = temp->next;
+		ft_printf("[%d] --> %d\n ", chaine->index, (int)(chaine->content));
+		ft_printf("			{ ra: %d, rb: %d, rra: %d, rrb: %d, rr: %d, rrr: %d, bok: %d, bok_index: %d}\n", chaine->ell.ra, chaine->ell.rb, chaine->ell.rra, chaine->ell.rrb, chaine->ell.rr, chaine->ell.rrr, chaine->ell.bok, chaine->ell.bok_index);
+		chaine = chaine->next;
 	}
 }
-
 int	char_in(const char *str)
 {
 	int		i;

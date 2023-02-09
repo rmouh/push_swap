@@ -6,7 +6,7 @@
 /*   By: rmouhoub <rmouhoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 17:14:46 by rmouhoub          #+#    #+#             */
-/*   Updated: 2023/02/02 14:41:42 by rmouhoub         ###   ########.fr       */
+/*   Updated: 2023/02/09 18:19:41 by rmouhoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,15 @@ t_list	*ft_lstnew(int content,int index)
 	new->content = content;
 	new->index = index;
 	new->next = NULL;
+	new->ell.ra = 0;
+	new->ell.rb = 0;
+	new->ell.rra = 0;
+	new->ell.rrb = 0;
+	new->ell.rrr = 0;
+	new->ell.rr = 0;
+	new->ell.bok = -1;
+	new->ell.bok_index = 0;
+
 	return (new);
 }
 /*

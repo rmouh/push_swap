@@ -6,7 +6,7 @@
 /*   By: rmouhoub <rmouhoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 17:19:01 by rmouhoub          #+#    #+#             */
-/*   Updated: 2023/02/02 10:48:58 by rmouhoub         ###   ########.fr       */
+/*   Updated: 2023/02/09 15:19:08 by rmouhoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,22 @@ t_list	*the_chaine(int argc, char *argv[])
 	t_list	*chaine;
 
 	nb = 1;
+	// chaine = 0;
 	chaine = ft_lstnew(ft_atoi(argv[nb]), nb);
+	if (argv[nb][0] == '\0')
+	{
+		exit(16);// free
+		free (chaine);
+	} 
 	while (++nb < argc)
+	{
+		if (!argv[nb][0])
+		{
+			exit(16);// free 
+			freee(&chaine);
+		}
 		ft_lstadd_back(&chaine, ft_lstnew(ft_atoi(argv[nb]), nb));
+	}
 	return(chaine);
 }
 int is_duplicate(long long int tab[], int size)
