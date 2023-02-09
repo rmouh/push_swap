@@ -65,6 +65,9 @@ void 	swap(int *t1, int *t2);
 int		*bubble_sort(int *tab, int size);
 int 	tab_size(int *tab);
 void 	each_time(t_list **chaine, t_list **chaineB);
+void ra_or_rra(int headA, int size, t_list **chaine,  t_list **chaineB)
+;
+
 
 
 

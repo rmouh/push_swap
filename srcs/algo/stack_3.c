@@ -95,9 +95,9 @@ void shuffle(t_list **stackA, t_list **stackB)
 
 void	for_five(t_list	**stackA, t_list **stackB)
 {
-	t_list	*temp;
+	//t_list	*temp;
 
-	temp = *stackA;
+	//temp = *stackA;
 	shuffle(stackA, stackB);
 	shuffle(stackA, stackB);
 	// // ft_printf("the stack Abefor;\n");

@@ -44,7 +44,7 @@ ${NAME}		: ${OBJS}
 		${CC} $(OBJS) -o $(NAME) -L./libft/ -lft
 
 ${DIR_OBJS}/%.o:%.c
-		${CC} ${CFLAGS} -I ${INCLUDES} -I ${LIBFT} -c $< -o $@
+		${CC}  -I ${INCLUDES} -I ${LIBFT} -c $< -o $@
 
 clean :
 		make -C ./libft/ clean

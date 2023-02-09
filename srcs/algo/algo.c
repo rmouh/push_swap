@@ -170,19 +170,49 @@ int find_position(t_list *chaineB, int value)
 // 			//pb(chaine, chaineB);
 // }
 // }
+void ra_or_rra(int headA, int size, t_list **chaine,  t_list **chaineB)
+{
+	int	po;
+	int	po2;
+	int done;
+
+	po = find_position(*chaineB, headA);
+	po2 = po;
+	while (po-- > 0)
+	{
+		if(po2 / size < 0.5)//faire des rra
+			{rrb(chaineB, 1);
+			done = 1;}
+		else//fqire des rra
+			{rb(chaineB, 1);
+			done = 0;}
+	}
+	pb(chaine, chaineB);
+	//po2 = po;
+	while (po2-- > 0)
+	{
+	ft_printf("herere");
+		if(done == 1)//faire des rra
+			rb(chaineB, 1);
+		else//fqire des rra
+			rrb( chaineB, 1);
+	}
+}
+
 
 void each_time(t_list **chaine, t_list **chaineB)
 {
-	t_list	*temp;
 	int		*tab;
 	int		size_A;
 	int		med;
 	int		headA;
 	int		headB;
-	int		po;
-	int		po2;
+	t_list	*tmp;
+	// int		po;
+	// int		po2;
 
-	(void )chaineB;
+	//(void )chaineB;
+		tmp = *chaine;
 	
 	while (ft_lstsize(*chaine) > 3)
 	{
@@ -197,7 +227,7 @@ void each_time(t_list **chaine, t_list **chaineB)
 		//ft_printf(">= MEDIANE = %i SIZE %i\n", med, ft_lstsize(*chaine));
 
 		size_A = ft_lstsize(*chaine);
-		temp = *chaine;
+		tmp = *chaine;
 		while (size_A-- > 0 && ft_lstsize(*chaine) > 3)
 		{
 			//ft_printf("the stack A\n");
@@ -226,23 +256,14 @@ void each_time(t_list **chaine, t_list **chaineB)
 					// 	rb(chaineB, 1);
 					// }
 					else //if (headA < headB && headA < lst_content(*chaineB))//find the position 
-					{
-
-						po = find_position(*chaineB, headA);
-						po2 = po;
-						while (po-- > 0)
-							rb(chaineB, 1);
-						pb(chaine, chaineB);
-						while (po2-- > 0)
-							rrb(chaineB, 1);
-					}
+						ra_or_rra(headA, ft_lstsize(*chaineB), chaine, chaineB);
 				}
 				else //rotate < med
 				{
 					ra(chaine, 1);	
 				}
 			}
-			temp = (*chaine)->next;			
+			tmp = (*chaine)->next;			
 		}
 		free(tab);
 	}
