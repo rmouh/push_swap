@@ -6,7 +6,7 @@
 /*   By: rmouhoub <rmouhoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 17:35:37 by rmouhoub          #+#    #+#             */
-/*   Updated: 2023/02/09 16:16:00 by rmouhoub         ###   ########.fr       */
+/*   Updated: 2023/02/12 12:04:51 by rmouhoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_list
 {
 	int				content;
 	int				index;
+	int				lower_cost;
 	struct s_list	*next;
 	t_bestmove		ell;
 }					t_list;

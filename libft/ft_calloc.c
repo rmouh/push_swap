@@ -6,7 +6,7 @@
 /*   By: rmouhoub <rmouhoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 17:10:42 by rmouhoub          #+#    #+#             */
-/*   Updated: 2023/02/09 15:40:04 by rmouhoub         ###   ########.fr       */
+/*   Updated: 2023/02/12 12:58:34 by rmouhoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_list	*ft_callloc(int nmemb)
 
 	buf = malloc(sizeof(t_list) * nmemb);
 	if (!buf)
-		return (NULL);
+		return (0);
 	temp = buf;
 	while(nmemb-- > 0)
 	{

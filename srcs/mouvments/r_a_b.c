@@ -6,7 +6,7 @@
 /*   By: rmouhoub <rmouhoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 17:03:18 by rmouhoub          #+#    #+#             */
-/*   Updated: 2023/02/03 14:20:51 by rmouhoub         ###   ########.fr       */
+/*   Updated: 2023/02/12 18:48:23 by rmouhoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	rb(t_list **chaine, int p)
 	if (p)
 		ft_printf("rb\n");
 	update(chaine);
+
 	return (1);
 }
 

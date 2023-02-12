@@ -6,7 +6,7 @@
 /*   By: rmouhoub <rmouhoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 18:22:06 by rmouhoub          #+#    #+#             */
-/*   Updated: 2023/02/03 16:39:21 by rmouhoub         ###   ########.fr       */
+/*   Updated: 2023/02/12 14:20:10 by rmouhoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,16 @@ void for_tree(t_list **stack)
 {
 	t_list	*chaine;
 
+	if (!*stack)
+		return ;
 	chaine = *stack;
 	int st;
 	int nd;
 	int rd;
 	if (!chaine || !chaine->next || !chaine->next->next)
 		return ;
+	// if (!chaine->content || !chaine->next->content || !chaine->next->next->content)
+	// 	return ;
 	st = chaine->content;
 	nd = chaine->next->content;
 	rd = chaine->next->next->content;
@@ -31,15 +35,17 @@ void for_tree(t_list **stack)
 		sa(stack, 1);
 	}
 	else if (st < nd && nd > rd && rd < st)
+	{
 		rra(stack, 1);
+	}
 	else if (st > nd  && rd > nd && st < rd)
 		sa(stack, 1);
 	else if (st > nd && nd < rd && st > rd)
 		ra(stack, 1);	
 	else if (st > nd &&  nd > rd)
 	{
-			ra(stack, 1);
-			sa(stack, 1);
+		ra(stack, 1);
+		sa(stack, 1);		
 	}
 	update(stack);
 }

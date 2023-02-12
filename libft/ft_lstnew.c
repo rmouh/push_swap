@@ -6,7 +6,7 @@
 /*   By: rmouhoub <rmouhoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 17:14:46 by rmouhoub          #+#    #+#             */
-/*   Updated: 2023/02/09 18:19:41 by rmouhoub         ###   ########.fr       */
+/*   Updated: 2023/02/12 12:59:43 by rmouhoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_list	*ft_lstnew(int content,int index)
 	if (!new)
 		return (NULL);
 	new->content = content;
+	new->lower_cost = -1;
 	new->index = index;
 	new->next = NULL;
 	new->ell.ra = 0;

@@ -6,7 +6,7 @@
 /*   By: rmouhoub <rmouhoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:48:02 by rmouhoub          #+#    #+#             */
-/*   Updated: 2023/02/02 13:15:39 by rmouhoub         ###   ########.fr       */
+/*   Updated: 2023/02/12 14:03:47 by rmouhoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	sa(t_list **chaine, int p)
 {
 	int	temp;
 
-	if ((*chaine)->next == NULL || *chaine == NULL)
+	if (*chaine == NULL || (*chaine)->next == NULL)
 		return (0); // do nothing
 	temp = (*chaine)->content;
 	(*chaine)->content = (*chaine)->next->content;

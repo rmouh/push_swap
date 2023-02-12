@@ -6,223 +6,237 @@
 /*   By: rmouhoub <rmouhoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 15:03:00 by rmouhoub          #+#    #+#             */
-/*   Updated: 2023/02/09 19:51:36 by rmouhoub         ###   ########.fr       */
+/*   Updated: 2023/02/12 19:14:57 by rmouhoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 
-int before_lst_content (t_list *chaineB)
-{
-	t_list *temp;
-	t_list	*chaine;
-	
-	chaine = chaineB;
-	temp = ft_beforlast(chaine);
-	return (temp->content);
-}
-
-int lst_content (t_list *chaineB)
-{
-	t_list *temp;
-	t_list	*chaine;
-	
-	chaine = chaineB;
-	temp = ft_lstlast(chaine);
-	return (temp->content);
-}
-
-int find_position(t_list *chaineB, int value)
-{
-	t_list	*tmp;
-	int		position;
-	
-	position = 0;
-	tmp = chaineB;
-	while (tmp != NULL)
-	{
-		if (tmp->content < value)
-			return (position);
-		position++;
-		tmp = tmp->next;
-	}
-	return (position);
-}
-
-
-int the_median(t_list **chaine)
-{
-	int		*tab;
-	int		size_A;
-	int		med;
-	
-	size_A =ft_lstsize(*chaine);
-	tab = tab_of_list(*chaine, size_A);
-	tab = bubble_sort(tab, size_A);
-	med = tab[size_A / 2];
- 	ft_printf(">= MEDIANE = %i SIZE %i\n", med, size_A);
-	return (med);
-}
-
-void find_bok(t_list **chaine, t_list **chaineB)
-{
-	int			A_value;
-	int			B_value;
-	t_list		*temp_A;
-	t_list		*temp_B;
-	int			i;
-	
-	temp_B = *chaineB;
-	temp_A = *chaine;
-
-	while (temp_B != NULL)
-	{
-		i = 1;
-		temp_A = *chaine;
-		B_value = temp_B->content;
-		temp_B->ell.bok = temp_A->content;
-		while (temp_A != NULL)
-		{
-			A_value = temp_A->content;
-			if (A_value > B_value && A_value <= temp_B->ell.bok)
-			{
-				temp_B->ell.bok = A_value;
-				temp_B->ell.bok_index = i;
-			}
-			i++;
-			temp_A = temp_A->next;
-		}
-		ft_printf("index %d \n", i);
-		temp_B = temp_B->next;
-	}
-}
-
-int find_the_cheaper(t_list **chaineB)
-{
-	t_list		*temp_B;
-	int			temp;
-	int			index;
-	
-	temp_B = *chaineB;
-	index = 1;
-	temp =  temp_B->index + temp_B->ell.bok_index; 
-	while (temp_B != NULL)
-	{
-		if (temp_B->index + temp_B->ell.bok_index < temp)
-		{
-			temp =  temp_B->index + temp_B->ell.bok_index;
-			index = temp_B->index;
-		}
-		temp_B = temp_B->next;
-	}
-	return (index);
-}
-
-int	ra_cost(t_list **chaineB, int value)
-{
-	t_list	*track;
-	int		size;
-
-	size = ft_lstsize(*chaineB);
-	track = *chaineB;
-	
-	while (track!= NULL)
-	{
-		track->ell.ra = track->index - 1;
-		track->ell.rra = size - track->index;
-		track
-	}
-}
-
-
-
-int	the_min_cost(t_list *element, int sizeA, int sizeB, t_list **chaine, t_list **chaineB)
+void	the_min_cost(t_list *element, int sizeA, int sizeB, t_list **chaine, t_list **chaineB)
 {
 	int	up;
 	int	down;
 	int	up_do;
 	int	do_up;
 	
-	up = ft_cost_of_up(element->ell.bok_index, element->index - 1);
-	down = ft_cost_of_down(sizeA - element->ell.bok_index + 1, sizeB - element->index + 1);
-	up_do = ft_cost_of_up_do(element->ell.bok_index,  sizeB - element->index + 1);
-	do_up = ft_cost_of_do_up(sizeA - element->ell.bok_index + 1, element->index - 1);
+	// ft_printf("This is the comment\n");
+	// printl(*chaine);
+	fill_ell(element, sizeA, sizeB);
+	//ft_printf("This is the comment2\n");
+	up = ft_cost_of_up(element->ell.ra,element->ell.rb);
+	down = ft_cost_of_down(element->ell.rra, element->ell.rrb);
+	up_do = ft_cost_of_up_do(element->ell.ra,  element->ell.rrb);
+	do_up = ft_cost_of_do_up(element->ell.rra, element->ell.rb);
+	//printl(*chaine);
 	if (up < down && up < up_do && up < do_up)
-		ft_do_up(chaine, chaineB, up, ft_min(sizeA - element->ell.bok_index, sizeB - element->index));
+		ft_do_up(chaine, chaineB, element->ell.ra, element->ell.rb);
 	else if (down < up && down < up_do && down < do_up)
-		ft_do_down(chaine, chaineB, down, ft_min(element->ell.bok_index, element->index - 1));
+		ft_do_down(chaine, chaineB, element->ell.rra, element->ell.rrb);
 	else if (up_do < up && up_do < down && up_do < do_up)
-		ft_do_up_do(chaine, chaineB, ,);
+		ft_do_up_do(chaine, chaineB, element->ell.ra, element->ell.rrb);
 	else
-		ft_do_do_up();
+		ft_do_do_up(chaine, chaineB, element->ell.rra, element->ell.rb);
 }
 
-void	ft_do_up(t_list **chaine, t_list **chaineB, int nb_of_ra, int nb_of_rb)
+int	the_costs(t_list *element, int sizeA, int sizeB)
 {
-	int	min;
-	int	i;
-
-	i = 0;
-	min = ft_min(nb_of_ra, nb_of_rb);
-	if (min == nb_of_ra)
-	{
-		while (min-- > 0)
-			rr(chaine, chaineB);	
-		while(i++ < nb_of_rb - nb_of_ra)
-			rb(chaineB, 1);
-	}
+	int	up;
+	int	down;
+	int	up_do;
+	int	do_up;
+	
+	fill_ell(element, sizeA, sizeB);
+	up = ft_cost_of_up(element->ell.ra,element->ell.rb);
+	down = ft_cost_of_down(element->ell.rra, element->ell.rrb);
+	up_do = ft_cost_of_up_do(element->ell.ra,  element->ell.rrb);
+	do_up = ft_cost_of_do_up(element->ell.rra, element->ell.rb);
+	element->lower_cost = ft_min_of_four(up, down, up_do, do_up);
+	if (up < down && up < up_do && up < do_up)
+		return (1);
+	else if (down < up && down < up_do && down < do_up)
+		return (2);
+	else if (up_do < up && up_do < down && up_do < do_up)
+		return (3);
 	else
+		return (4);
+}
+
+void action(t_list **chaine, t_list **chaineB, int result, t_list *element)
+{
+	if (result == 1)
+		ft_do_up(chaine, chaineB, element->ell.ra, element->ell.rb);
+	else if (result == 2)
+		ft_do_down(chaine, chaineB, element->ell.rra, element->ell.rrb);
+	else if (result == 3)
+		ft_do_up_do(chaine, chaineB, element->ell.ra, element->ell.rrb);
+	else
+		ft_do_do_up(chaine, chaineB, element->ell.rra, element->ell.rb);
+}
+
+void the_median_algo(t_list **chaine, t_list **chaineB)
+{
+	int	med;
+	int	found;
+	
+	found  = 0;
+	med = the_median(chaine);
+	// ft_printf("chaine A\n");
+	// 	printll(*chaine);
+	// 	ft_printf("chaine B\n");
+	// 	printll(*chaineB);
+	while (ft_lstsize(*chaine) > 3)
 	{
-		while (min-- > 0)
-			rr(chaine, chaine);	
-		while(i++ <nb_of_ra - nb_of_rb)
+		if ((*chaine)->content == med)
+		{
+			found++;
+			if (found == 2)
+			{
+				pb(chaine, chaineB);
+				med = the_median(chaine);
+				found = 0;
+			}
+			else 
+				ra(chaine, 1);
+		}
+		else if ((*chaine)->content < med)
+			pb(chaine, chaineB);
+		else
 			ra(chaine, 1);
+		// 			ft_printf("chaine A\n");
+		// printll(*chaine);
+		// ft_printf("chaine B\n");
+		// printll(*chaineB);
 	}
 }
 
-void	ft_do_down(t_list **chaine, t_list **chaineB, int nb_of_rra, int nb_of_rrb)
+t_list	*the_min_of_b(t_list **chaineB)
 {
-	int	min;
-	int	i;
-
-	i = 0;
-	min = ft_min(nb_of_rra, nb_of_rrb);
-	if (min == nb_of_rra)
+	t_list 	*temp;
+	t_list	*min;
+	
+	temp = (*chaineB);
+	min = (*chaineB);
+	while (temp->next != NULL)
 	{
-		while (min-- > 0)
-			rrr(chaine, chaineB);	
-		while(i++ <nb_of_rrb - nb_of_rra)
-			rrb(chaineB, 1);
+		if (temp->next->lower_cost < min->lower_cost)
+			min = temp->next;
+		temp = temp->next;
 	}
-	else
+	return (min);
+}
+
+int the_max_of_a(t_list **chaine)
+{
+	t_list 	*temp;
+	int	max;
+	
+	temp = (*chaine);
+	max = temp->content;
+	while (temp->next != NULL)
 	{
-		while (min-- > 0)
-			rrr(chaine, chaineB);	
-		while(i++ <nb_of_rra - nb_of_rrb)
+		if (temp->next->content > max)
+			max = temp->next->content;
+		temp = temp->next;
+	}
+	return (max);
+}
+
+int the_min_of_a(t_list **chaine)
+{
+	t_list 	*temp;
+	int	max;
+	
+	temp = (*chaine);
+	max = temp->content;
+	while (temp->next != NULL)
+	{
+		if (temp->next->content < max)
+			max = temp->next->content;
+		temp = temp->next;
+	}
+	return (max);
+}
+
+t_list	*cost_loop_and_min(t_list **chaine, t_list **chaineB)
+{
+	t_list	*track;
+
+	track = *chaineB;
+	
+	// printl(*chaineB);
+	// ft_printf("chaine A\n");
+	// printl(*chaine);
+	find_bok(chaine, chaineB);
+	while (track != NULL)
+	{
+		the_costs(track, ft_lstsize(*chaine), ft_lstsize(*chaineB));
+		track = track->next;
+	}
+	return (the_min_of_b(chaineB));
+}
+
+void the_algo(t_list **chaine, t_list **chaineB)
+{
+	 t_list	*min;
+	if (!*chaine)
+		return ;
+	the_median_algo(chaine, chaineB); // evry thing pushed to B
+	for_tree(chaine);
+	while (ft_lstsize(*chaineB) > 0)
+	{
+		min = cost_loop_and_min(chaine, chaineB);	// cost for all B + min cost
+		//ft_printf(" MIN : [%d],it index [%d] the bok [%d], the bok index [%d] \n", min->content, min->index, min->ell.bok, min->ell.bok_index);
+		the_min_cost(min, ft_lstsize(*chaine), ft_lstsize(*chaineB), chaine, chaineB);// act on the min 
+		
+	//printll(*chaine);
+		//ft_printf("the size [%d]\n", ft_lstsize(*chaineB));
+	}
+	//stabilizer(chaine);
+	// ft_printf("chainerrr A\n");
+	// printll(*chaine);
+	// ft_printf("chaine B\n");
+	// printll(*chaineB);
+}
+
+void stabilizer(t_list **chaine)
+{
+	t_list *temp;
+	int		before;
+	int		after;
+	int		size;
+	int		i;
+
+	temp = *chaine;
+	while (temp->next != NULL)
+	{
+		before = temp->content;
+		after = temp->next->content;
+		if (after < before)
+			break ;
+		temp = temp->next;
+	}
+	size = ft_lstsize(temp);
+	i = 0;
+	if (size > (ft_lstsize(*chaine) / 2))
+	{	
+		while (i++ <= ft_lstsize(*chaine) - size)
+			{
+				ra(chaine, 1);}
+	}
+	else 
+	{
+		while (i++ < size - 1)
 			rra(chaine, 1);
 	}
+	
 }
-
-// int action(t_list **chaine, t_list *chaineB, int result)
-// {
-// 	if (result == 1)
-// 	{
-// 		ft_do_up();
-// 	}
-// 	else if (result == 2)
-// 		ft_do_down();
-// 	else if (result == 3)
-// 		ft_do_up_do();
-// 	else
-// 		ft_do_do_up();
-// }
 
 
 int main(int argc, char *argv[]){
 	
-	t_list	*chaine = 0;
-	t_list	*chaineB = 0;
+	t_list	*chaine ;
+	t_list	*chaineB = NULL;
 	
 	if (argc == 1)
 		return (write(2, "ERROR nothing to sort\n", 22), 0);
@@ -235,25 +249,44 @@ int main(int argc, char *argv[]){
 			return(0);//erreur du malloc
 		//printl(chaine);
 		//rra(&chaine, 1);
-		chaineB = the_chaine(argc, argv);
-		ft_lstadd_front(&chaineB, ft_lstnew( 1, 1));
-		ft_lstadd_front(&chaineB, ft_lstnew( 2, 2));
-		ft_lstadd_front(&chaineB, ft_lstnew( 10, 3));
-		ft_lstadd_front(&chaineB, ft_lstnew( 14, 4));
-		ft_lstadd_front(&chaineB, ft_lstnew( 44, 5));
-		update (&chaineB);
+		// chaineB = the_chaine(argc, argv);
+		// ft_lstadd_front(&chaineB, ft_lstnew( 1, 1));
+		// ft_lstadd_front(&chaineB, ft_lstnew( 2, 2));
+		// ft_lstadd_front(&chaineB, ft_lstnew( 10, 3));
+		// ft_lstadd_front(&chaineB, ft_lstnew( 14, 4));
+		// ft_lstadd_front(&chaineB, ft_lstnew( 44, 5));
+		// update (&chaineB);
 
 
-		find_bok(&chaine, &chaineB);
-		printl(chaine);
-		ft_printf("end\n");
+		// find_bok(&chaine, &chaineB);
+		// ft_printf("chaine A\n");
+		// printl(chaine);
+		// ft_printf("chaine B\n");
+		// printl(chaineB);
+		// printl(chaineB);
+		// ft_printf("end\n");
 
-		printl(chaineB);
-		ft_printf("end\n");
+		// ft_printf("the cheaper %d \n", find_the_cheaper(&chaineB));
+		the_algo(&chaine, &chaineB);
+		
+		// printll(chaineB);
+		// find_bok(&chaineB, &chaine);
+		// ft_printf("chaine B\n");
+		
+		// printl(chaineB);
+		// ft_printf("chaine A\n");
+		// printl(chaine);
+		stabilizer(&chaine);
+		// ft_printf("chaine after st A\n");
+		// printl(chaine);
+		// ft_printf("chaine A\n");
+		// ft_printf("chaine B\n");
+		// printl(chaineB);
 
-		ft_printf("the cheaper %d \n", find_the_cheaper(&chaineB));
 
-
+		// printl(chaineB);
+		// ft_printf("end\n");
+		
 		// //sa(&chaine,1);
 	//	print_tab(tab, argc - 1);
 	//	print_tab(bubble_sort(tab, argc - 1), argc - 1);
@@ -279,6 +312,21 @@ int main(int argc, char *argv[]){
 }
 }
 /*
+// int	ra_cost(t_list **chaineB, int value)
+// {
+// 	t_list	*track;
+// 	int		size;
+
+// 	size = ft_lstsize(*chaineB);
+// 	track = *chaineB;
+	
+// 	while (track!= NULL)
+// 	{
+// 		track->ell.ra = track->index - 1;
+// 		track->ell.rra = size - track->index;
+// 		track
+// 	}
+// }
 void each_time(t_list **chaine, t_list **chaineB)
 {
 	int		*tab;
@@ -485,5 +533,41 @@ void ra_or_rra(int headA, int size, t_list **chaine,  t_list **chaineB)
 // 			printl(*chaineB);
 // 			//pb(chaine, chaineB);
 // }
+// }
+// int before_lst_content (t_list *chaineB)
+// {
+// 	t_list *temp;
+// 	t_list	*chaine;
+	
+// 	chaine = chaineB;
+// 	temp = ft_beforlast(chaine);
+// 	return (temp->content);
+// }
+
+// int lst_content (t_list *chaineB)
+// {
+// 	t_list *temp;
+// 	t_list	*chaine;
+	
+// 	chaine = chaineB;
+// 	temp = ft_lstlast(chaine);
+// 	return (temp->content);
+// }
+
+// int find_position(t_list *chaineB, int value)
+// {
+// 	t_list	*tmp;
+// 	int		position;
+	
+// 	position = 0;
+// 	tmp = chaineB;
+// 	while (tmp != NULL)
+// 	{
+// 		if (tmp->content < value)
+// 			return (position);
+// 		position++;
+// 		tmp = tmp->next;
+// 	}
+// 	return (position);
 // }
 	*/

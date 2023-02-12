@@ -6,7 +6,7 @@
 #    By: rmouhoub <rmouhoub@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/02 11:23:16 by rmouhoub          #+#    #+#              #
-#    Updated: 2023/02/09 19:31:54 by rmouhoub         ###   ########.fr        #
+#    Updated: 2023/02/12 13:57:21 by rmouhoub         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ DIR_MOVS		=	mouvments
 DIR_OBJS		=	objs
 
 SRCS 		= 	$(DIR_ALGO)/stack_3.c \
+				$(DIR_ALGO)/do_up_down.c \
 				$(DIR_ALGO)/algo.c \
 				$(DIR_ALGO)/utils.c \
 				$(DIR_ALGO)/costs.c \
@@ -29,7 +30,7 @@ SRCS 		= 	$(DIR_ALGO)/stack_3.c \
 				$(DIR_MOVS)/r_a_b.c \
 				$(DIR_MOVS)/s_a_b.c \
 
-CFLAGS		= -g -Wall -Werror -Wextra
+CFLAGS		= -Wall -Werror -Wextra -g3
 CC			= cc
 BUILD_DIR 	= .build
 INCLUDES	= includes 
