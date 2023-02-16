@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
+#    ZMakefile                                          :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: rmouhoub <rmouhoub@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/27 15:09:53 by rmouhoub          #+#    #+#              #
-#    Updated: 2023/02/02 11:19:50 by rmouhoub         ###   ########.fr        #
+#    Updated: 2023/02/16 12:28:29 by rmouhoub         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,8 @@ DIR_ALGO		=	algo
 DIR_PARSER		=	parser
 DIR_MOVS		=	mouvments
 DIR_OBJS		=	objs
+DIR_CHECK		=	../checker
+
 
 
 SRCS 		= 	$(DIR_ALGO)/stack_3.c \
@@ -27,6 +29,7 @@ SRCS 		= 	$(DIR_ALGO)/stack_3.c \
 				$(DIR_MOVS)/p_a_b.c \
 				$(DIR_MOVS)/r_a_b.c \
 				$(DIR_MOVS)/s_a_b.c \
+				$(DIR_CHECK)/mychecker.c \
 
 OBJS = $(SRCS:%.c=$(DIR_OBJS)/%.o)
 SOURCES_PREFIXED	=	$(addprefix $(DIR_SRCS)/, $(SRCS))

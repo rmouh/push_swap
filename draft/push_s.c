@@ -6,7 +6,7 @@
 /*   By: rmouhoub <rmouhoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 11:59:15 by rmouhoub          #+#    #+#             */
-/*   Updated: 2023/02/09 16:30:37 by rmouhoub         ###   ########.fr       */
+/*   Updated: 2023/02/16 13:32:38 by rmouhoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,321 @@ int main(int argc, char *argv[]){
 	if (ft_lstsize(tmp_chaine) == 3)
 		for_tree(chaine);
 }
+/*
+		//erreur du malloc
+		//printl(chaine);
+		//rra(&chaine, 1);
+		// chaineb = the_chaine(argc, argv);
+		// ft_lstadd_front(&chaineb, ft_lstnew( 1, 1));
+		// ft_lstadd_front(&chaineb, ft_lstnew( 2, 2));
+		// ft_lstadd_front(&chaineb, ft_lstnew( 10, 3));
+		// ft_lstadd_front(&chaineb, ft_lstnew( 14, 4));
+		// ft_lstadd_front(&chaineb, ft_lstnew( 44, 5));
+		// update (&chaineb);
+		// find_bok(&chaine, &chaineb);
+		// ft_printf("chaine A\n");
+		// printl(chaine);
+		// ft_printf("chaine B\n");
+		// printl(chaineb);
+		// printl(chaineb);
+		// ft_printf("end\n");
 
+		// ft_printf("the cheaper %d \n", find_the_cheaper(&chaineb));
+		// printll(chaineb);
+		// find_bok(&chaineb, &chaine);
+		// ft_printf("chaine B\n");
+		// printl(chaineb);
+		// ft_printf("chaine A\n");
+		// printl(chaine);
+		// ft_printf("chaine after st A\n");
+		// printl(chaine);
+		// ft_printf("chaine A\n");
+		// ft_printf("chaine B\n");
+		// printl(chaineb);
+		// printl(chaineb);
+		// ft_printf("end\n");
+		// //sa(&chaine,1);
+	//	print_tab(tab, argc - 1);
+	//	print_tab(bubble_sort(tab, argc - 1), argc - 1);
+		// each_time(&chaine, &chaineb);
+		// //for_five(&chaine, &chaineb);
+		// for_tree(&chaine);
+		// while ( ft_lstsize(chaineb) > 0)
+		// 	pa(&chaineb, &chaine);
+		// ft_printf("end\n");
+		// printl(chaine);
+		// rra(&chaine, 1);
+		// rra(&chaine, 1);
+		// rra(&chaine, 1);
+		// // rra(&chaine, 1);
+		// // rra(&chaine, 1);
+		// ft_printf("end\n");
+		// printl(chaine);
+		// freee(&chaine);
+		// freee(&chaineb);
+*/
+}
+
+/*
+// int	ra_cost(t_list **chaineb, int value)
+// {
+// 	t_list	*track;
+// 	int		size;
+
+// 	size = ft_lstsize(*chaineb);
+// 	track = *chaineb;
+	
+// 	while (track!= NULL)
+// 	{
+// 		track->ell.ra = track->index - 1;
+// 		track->ell.rra = size - track->index;
+// 		track
+// 	}
+// }
+void each_time(t_list **chaine, t_list **chaineb)
+{
+	int		*tab;
+	int		size_A;
+	int		med;
+	int		headA;
+	int		headB;
+	t_list	*tmp;
+	// int		po;
+	// int		po2;
+
+	//(void )chaineb;
+		tmp = *chaine;
+	
+	while (ft_lstsize(*chaine) > 3)
+	{
+		
+		tab = tab_of_list(*chaine, ft_lstsize(*chaine));
+		tab = bubble_sort(tab, ft_lstsize(*chaine));
+		//tab = bubble_sort(tab_of_list(*chaine, ft_lstsize(*chaine)), ft_lstsize(*chaine));
+		// med = median(tab, ft_lstsize(*chaine));
+		med = tab[ft_lstsize(*chaine) / 2];
+		
+		// if (med == 0)
+		// 	print_tab(tab, 100);
+
+		size_A = ft_lstsize(*chaine);
+		tmp = *chaine;
+		while (size_A-- > 0 && ft_lstsize(*chaine) > 3)
+		{
+			// ft_printf("the stack A\n");
+			// printl((*chaine));
+			// ft_printf("the stack B\n");
+			// printl(*chaineb);
+			headA = (*chaine)->content;
+			//ft_printf("the head of A %d\n", headA);
+			if (headA > med) // > med
+			{
+				if (ft_lstsize(*chaineb) == 0)
+				{
+					//ft_printf("hererererereA\n");
+
+					pb(chaine, chaineb);
+					headB = (*chaineb)->content;
+
+				}
+				else if (headA > headB)// at the top
+				{
+					pb(chaine, chaineb);
+					headB = (*chaineb)->content;
+
+				}
+				else if (headA < lst_content(*chaineb)) // at the end 
+				{
+					//ft_printf("the head of B %d\n", headB);
+				
+					pb(chaine, chaineb);
+					rb(chaineb, 1);
+				headB = (*chaineb)->content;
+				}
+				 //if (headA < headB && headA < lst_content(*chaineb))//find the position 
+				else
+				{
+					headB = (*chaineb)->content;
+
+					ra_or_rra(headA, ft_lstsize(*chaineb), chaine, chaineb);
+					headB = (*chaineb)->content;
+					//ft_printf("the head of A %d the head of B %d\n", headA, headB);
+					
+				}
+			}
+			else //rotate < med
+				ra(chaine, 1);
+			tmp = (*chaine)->next;			
+		}
+		free(tab);
+	}
+	//rrb(chaineb, 1);
+	// ft_printf("the stack B\n");
+	// 		printl(*chaineb);
+}
+
+void ra_or_rra(int headA, int size, t_list **chaine,  t_list **chaineb)
+{
+	int	po;
+	int	po2;
+	int track;
+
+	po = find_position(*chaineb, headA);
+	
+	po2 = po;
+	
+	if(po2 <= size / 2)//faire des rra
+	{
+	//ft_printf("the position of  A %d  and the size of b %d\n", po, size );
+		track = po;
+		while (po-- > 0)
+			rb(chaineb, 1);
+		pb(chaine, chaineb);
+		while (track-- > 0)
+			rrb(chaineb, 1);
+	}
+	else//fqire des rra
+	{
+	//ft_printf("ttttttttttttthe position of  A %d  and the size of b %d\n", po, size );
+		
+		track = po;
+		while (po++ < size)
+			rrb(chaineb, 1);
+		pb(chaine, chaineb);
+		while (track++ <= size)
+			rb(chaineb, 1);
+	}
+	
+}
+// void each_time(t_list **chaine, t_list **chaineb)
+// {
+// 	int		*sorted;
+// 	int		compare;
+// 	int		med;
+// 	int 	found;
+	
+// 	sorted = tab_of_list(*chaine, ft_lstsize(*chaine));
+// 	sorted = bubble_sort(sorted, tab_size(sorted));
+// 	found = 0;
+// 	ft_printf("at the start\n");
+// 	printl(*chaine);
+// 	ft_printf("\n");
+// 	med = median(sorted);
+// 				ft_printf(">= MEDIANE = %i SIZE %i\n", med, ft_lstsize(*chaine));
+
+// 	while (ft_lstsize(*chaine) > 3)
+// 	{
+// 		// sleep(2);
+// 			if ((*chaine)->content >= med)
+// 			{
+// 				if ((*chaine)->content == med)
+// 				{
+// 					found++;
+// 					if (found == 2)
+// 					{
+// 						if (ft_lstsize((*chaineb)) > 0)
+// 						{
+// 							compare = (*chaineb)->content;
+// 							if (compare > (*chaine)->content)
+// 								{pb(chaine, chaineb);
+// 								ra(chaineb, 1);}
+// 							else 
+// 								pb(chaine, chaineb);
+// 						}
+// 						//pb(chaine, chaineb);
+// 						sorted = tab_of_list((*chaine), ft_lstsize((*chaine)));
+// 						med = median(sorted);
+// 						ft_printf(">= MEDIANE = %i SIZE %i\n", med, ft_lstsize(*chaine));
+// 						found = 0;
+// 						//return ;
+// 					}
+// 					else
+// 						ra(chaine, 1);
+// 					ft_printf("the stack B\n");
+// 					printl(*chaineb);
+// 				}
+// 				else
+// 				{
+// 						if (ft_lstsize((*chaineb)) > 0)
+// 						{
+// 		    				compare = (*chaineb)->content;
+// 							if (compare < (*chaine)->content && (*chaine)->content < lst_content(*chaineb)) // cas : is bigger ->at the top
+// 								pb(chaine, chaineb);
+// 							else if (compare > (*chaine)->content && (*chaine)->content < lst_content(*chaineb)) //need to find the position
+// 								{
+// 									int po = find_position(*chaineb, (*chaine)->content);
+// 									while (po-- > 0)
+// 										rb(chaineb, 1);
+// 									pb(chaine, chaineb);
+// 								}
+// 							else if (compare > (*chaine)->content && (ft_lstsize((*chaineb)) == 1 || lst_content (*chaineb) > (*chaine)->content))
+// 							{// is smaller then the last or  2 elements cas 
+// 								ft_printf("head of B: %d head of A: %d B size : %d lst element of B: %d\n", compare, (*chaine)->content, ft_lstsize((*chaineb)), lst_content (*chaineb));
+// 								pb(chaine, chaineb);
+// 								ra(chaineb, 1);
+// 							}
+// 							else//need to find the position
+// 								{
+// 									int po = find_position(*chaineb, (*chaine)->content);
+// 									while (po-- > 0)
+// 										rb(chaineb, 1);
+// 									pb(chaine, chaineb);
+// 								}
+// 						}
+// 						else
+// 						{
+// 							pb(chaine, chaineb);
+// 						}
+// 					ft_printf("the stack B\n");
+// 					printl(*chaineb);
+// 				}
+// 			}
+// 			else
+// 				ra(chaine, 1);
+// 			ft_printf("the stack A\n");
+// 			printl((*chaine));
+// 			ft_printf("the stack B\n");
+// 			printl(*chaineb);
+// 			//pb(chaine, chaineb);
+// }
+// }
+// int before_lst_content (t_list *chaineb)
+// {
+// 	t_list *temp;
+// 	t_list	*chaine;
+	
+// 	chaine = chaineb;
+// 	temp = ft_beforlast(chaine);
+// 	return (temp->content);
+// }
+
+// int lst_content (t_list *chaineb)
+// {
+// 	t_list *temp;
+// 	t_list	*chaine;
+	
+// 	chaine = chaineb;
+// 	temp = ft_lstlast(chaine);
+// 	return (temp->content);
+// }
+
+// int find_position(t_list *chaineb, int value)
+// {
+// 	t_list	*tmp;
+// 	int		position;
+	
+// 	position = 0;
+// 	tmp = chaineb;
+// 	while (tmp != NULL)
+// 	{
+// 		if (tmp->content < value)
+// 			return (position);
+// 		position++;
+// 		tmp = tmp->next;
+// 	}
+// 	return (position);
+// }
+	*/
 
 
 
